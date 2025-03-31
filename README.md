@@ -37,6 +37,7 @@ Multithreaded-portable-file-sharing-program-c-c-
   - POSIX threads (на Linux/Unix)
   - Winsock2 (на Windows)
 - **ОС:** Windows, Linux, macOS или другие UNIX-подобные системы
+- **Make:** Установленная утилита make для сборки проекта через Makefile
 
 ## Инструкции по сборке
 
@@ -49,20 +50,12 @@ git clone https://github.com/Photographer995/Multithreaded-portable-file-sharing
 cd Multithreaded-portable-file-sharing-program-c-c-
 ```
 
-### 2. Компиляция
+### 2. 2. Сборка проекта с использованием Makefile
 
-#### На UNIX-подобных системах
+Для сборки проекта выполните команду:
 
 ```bash
-g++ -std=c++17 -pthread src/main_server.cpp -o server
-g++ -std=c++17 -pthread src/main_client.cpp -o client
-```
-
-#### На Windows (пример для Visual Studio)
-
-```batch
-cl /EHsc /std:c++17 src\main_server.cpp ws2_32.lib /Fe:server.exe
-cl /EHsc /std:c++17 src\main_client.cpp ws2_32.lib /Fe:client.exe
+make
 ```
 
 ### 3. Запуск приложения
