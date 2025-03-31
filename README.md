@@ -50,7 +50,7 @@ git clone https://github.com/Photographer995/Multithreaded-portable-file-sharing
 cd Multithreaded-portable-file-sharing-program-c-c-
 ```
 
-### 2. 2. Сборка проекта с использованием Makefile
+### 2. Сборка проекта с использованием Makefile
 
 Для сборки проекта выполните команду:
 
