@@ -18,7 +18,7 @@
 #include <unistd.h>
 #endif
 
-// Конструктор: инициализирует корневой и текущий каталоги
+
 FileManager::FileManager(const std::string &rootPath) : rootPath(rootPath) {
     currentPath = std::filesystem::canonical(rootPath).string();
 }
@@ -94,7 +94,7 @@ void FileManager::sendFileToClient(int clientSocket, const std::string &filename
     }
     std::streamoff remaining = filesize - offset;
 
-    // Отправляем заголовок с информацией о размере передаваемых данных
+    
     std::string header = "FILE " + std::to_string(remaining) + "\n";
     send(clientSocket, header.c_str(), header.size(), 0);
 
@@ -129,7 +129,7 @@ void FileManager::receiveFile(int sock, const std::string &filename, std::stream
     std::string command = "get " + filename + " " + std::to_string(static_cast<long long>(resumeOffset)) + "\n";
     send(sock, command.c_str(), command.size(), 0);
 
-    // Получаем заголовок, содержащий размер передаваемых данных
+    
     char header[128];
     memset(header, 0, sizeof(header));
     int bytes = recv(sock, header, sizeof(header)-1, 0);
@@ -208,7 +208,7 @@ void FileManager::sendFileInfo(int clientSocket, const std::string &filename) co
                 ss << "Тип: неизвестный\n";
                 break;
         }
-        // Если это обычный файл – получаем размер
+        
         if(ftype == std::filesystem::file_type::regular) {
             try {
                 uintmax_t size = std::filesystem::file_size(filepath);
@@ -217,7 +217,7 @@ void FileManager::sendFileInfo(int clientSocket, const std::string &filename) co
                 ss << "Размер: неизвестен\n";
             }
         }
-        // Получаем права доступа и формируем строку, похожую на Unix-формат
+        
         auto perms = status.permissions();
         std::string permissionStr;
         // Владелец
@@ -236,7 +236,7 @@ void FileManager::sendFileInfo(int clientSocket, const std::string &filename) co
         permissionStr.push_back((perms & std::filesystem::perms::others_exec)  != std::filesystem::perms::none ? 'x' : '-');
         ss << "Права доступа: " << permissionStr << "\n";
 
-        // Получаем время последнего изменения
+        
         try {
             auto ftime = std::filesystem::last_write_time(filepath);
             auto sctp = std::chrono::system_clock::to_time_t(
