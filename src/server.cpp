@@ -31,13 +31,13 @@ struct ClientInfo {
     std::string ip;
 };
 
-// Глобальная переменная для корневого каталога
+
 std::string pathToRootdir;
 
 // Глобальный указатель на объект FileManager
 FileManager *globalFileManager = nullptr;
 
-// Функция для получения текущего времени в виде строки
+
 std::string getCurrentTimeStr() {
     auto now = std::chrono::system_clock::now();
     std::time_t now_time = std::chrono::system_clock::to_time_t(now);
@@ -46,7 +46,6 @@ std::string getCurrentTimeStr() {
     timeStr.erase(std::remove(timeStr.begin(), timeStr.end(), '\n'), timeStr.end());
     return timeStr;
 }
-// ... (включения, определения, структура ClientInfo, функции getCurrentTimeStr и т.д.)
 
 void* handle_client(void* arg) {
     ClientInfo* info = static_cast<ClientInfo*>(arg);
@@ -58,7 +57,7 @@ void* handle_client(void* arg) {
 
     char buffer[1024];
 
-    // Отправляем приветственное сообщение и список файлов через FileManager
+    
     std::string welcome = "Добро пожаловать на сервер обмена файлами!\n";
     send(clientSocket, welcome.c_str(), welcome.size(), 0);
     globalFileManager->sendDirectoryListing(clientSocket);
@@ -69,7 +68,7 @@ void* handle_client(void* arg) {
         if(bytesReceived <= 0)
             break;
         std::string command(buffer);
-        // Убираем символы переноса строки и возврата каретки
+        
         command.erase(std::remove(command.begin(), command.end(), '\n'), command.end());
         command.erase(std::remove(command.begin(), command.end(), '\r'), command.end());
 
@@ -184,7 +183,6 @@ void* handle_client(void* arg) {
     return nullptr;
 }
 
-// main() и остальной код остаются без изменений...
 
 
 int main(int argc, char* argv[]) {
@@ -192,7 +190,7 @@ int main(int argc, char* argv[]) {
     if(!parseArguments(argc, argv, port, pathToRootdir))
         return -1;
 
-    // Инициализируем FileManager с корневым каталогом
+    
     FileManager fileManager(pathToRootdir);
     globalFileManager = &fileManager;
 
