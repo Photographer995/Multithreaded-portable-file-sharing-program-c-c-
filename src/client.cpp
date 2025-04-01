@@ -7,7 +7,7 @@
 #include <cstdlib>
 #include <atomic>
 #include <thread>
-#include <clocale>         // Для установки локали
+#include <clocale>        
 #include "file_manager.h"
 
 #ifdef _WIN32
@@ -21,10 +21,10 @@
 #include <pthread.h>
 #endif
 
-// Глобальный флаг, сигнализирующий о том, что идёт приём файла
+
 std::atomic_bool g_receivingFile(false);
 
-// Поток для приёма текстовых сообщений от сервера
+
 void* recv_thread(void* arg) {
     int sock = *(int*)arg;
     char buffer[1024];
@@ -92,7 +92,7 @@ int main(int argc, char* argv[]) {
         return -1;
     }
 
-    // Основной цикл взаимодействия с сервером
+    
     std::string input;
     while(true) {
         std::cout << "\nВведите команду (ls, cd <dir>, get <file>, exit): ";
@@ -112,7 +112,7 @@ int main(int argc, char* argv[]) {
                 std::cout << "Укажите имя файла" << std::endl;
                 continue;
             }
-            // Перед началом загрузки файла ставим флаг
+            
             g_receivingFile.store(true);
             send(sock, input.c_str(), input.size(), 0);
 
@@ -125,10 +125,10 @@ int main(int argc, char* argv[]) {
 
             char buffer[1024];
             int bytesReceived;
-            // Читаем данные для файла до тех пор, пока они приходят
+            
             while ((bytesReceived = recv(sock, buffer, sizeof(buffer), 0)) > 0) {
                 outFile.write(buffer, bytesReceived);
-                // Если пришло меньше, чем размер буфера, предполагаем окончание передачи
+                
                 if (bytesReceived < (int)sizeof(buffer))
                     break;
             }
