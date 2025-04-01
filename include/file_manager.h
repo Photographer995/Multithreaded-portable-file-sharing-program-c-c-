@@ -20,8 +20,7 @@ public:
     // Возвращает текущий рабочий каталог
     std::string getCurrentPath() const;
 
-    // Устанавливает новый текущий каталог (если он находится внутри корневого каталога)
-    // Возвращает true при успехе, иначе false
+    
     bool setCurrentPath(const std::string &newPath);
 
     // Отправляет клиенту список файлов и каталогов текущего каталога
@@ -45,7 +44,7 @@ private:
     std::string rootPath;
     std::string currentPath;
 
-    // Вспомогательный метод: удаляет последний элемент пути (аналог removelastElement)
+    
     std::string removeLastElement(const std::string &path) const;
 };
 
