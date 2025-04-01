@@ -19,7 +19,7 @@
 #include <ifaddrs.h>
 #endif
 
-// Удаляет последний элемент пути, корректно обрабатывая случаи с разделителями
+
 std::string removelastElement(const std::string &path) {
     if(path.empty()) return path;
     std::string trimmed = path;
@@ -30,7 +30,7 @@ std::string removelastElement(const std::string &path) {
     return trimmed.substr(0, pos);
 }
 
-// Проверяет корректность аргументов командной строки: порт и путь к корневому каталогу
+
 bool parseArguments(int argc, char* argv[], int &port, std::string &rootDir) {
     if(argc != 3) {
         std::cerr << "Использование: " << argv[0] << " <порт> <путь_к_корневому_каталогу>" << std::endl;
@@ -54,7 +54,7 @@ bool parseArguments(int argc, char* argv[], int &port, std::string &rootDir) {
     return true;
 }
 
-// Получает локальный IP-адрес сервера (исправленный вариант)
+
 std::string getLocalIpAddress() {
     #ifdef _WIN32
     char hostname[256];
